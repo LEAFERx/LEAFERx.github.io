@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>%2F2019%2F04%2F02%2Fcornerstone%2Fbuffer%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[让你的 Nginx 在配置文件改变时自动 reload]]></title>
     <url>%2F2018%2F10%2F28%2Fnginx-autoreload%2F</url>
     <content type="text"><![CDATA[最近在重新配置自己的服务器，搭建了 gitea + drones 做 CI/CD。自动部署 Nginx 的配置文件就是其中的一个目标。 因为我的 Nginx 是以 root 运行的，所以在 reload 的时候一定需要 sudo 权限，如果把 reload 放在 drones 的 CD 过程中，就必须要创建一个具有 nopasswd sudo 权限的账户，并且让 drones ssh 上这个账户运行 reload 命令。 这样做是十分不安全的，如果有人获得了修改我的配置文件 repo 的权限，或者做到了可以控制 drones，那么他也就自动获得了服务器的 nopassed sudo 权限。所以我决定把配置文件自动部署和 Nginx 自动重载分开，也就是由 root 运行一个 py 脚本监控配置文件夹，在配置文件改变时自动执行 nginx -s reload 命令。 目前这份脚本已经上传至 GitHub：nginx-autoreload-service 脚本使用了 pyinotify 来监视配置文件夹，并且写了一个 .service 文件交给 systemd 做后台守护。 脚本可以做到命令延时执行，也就是如果在一定时间修改了多份配置文件，延时过后 reload 命令只会执行一次。 安装及配置方法详见 GitHub README 在写完这个脚本之后往 GitHub 一搜，就发现了很多类似的脚本，所以也权当练习了，而且那些脚本也不太符合我服务器的实际要求（尤其是延时执行，因为在 git pull 时可能会多次触发事件）。 # EOF]]></content>
@@ -14,6 +19,15 @@
         <tag>pyinotify</tag>
         <tag>systemd</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018年10月站点更新]]></title>
+    <url>%2F2018%2F10%2F28%2FSiteUpdate201810%2F</url>
+    <content type="text"><![CDATA[NexT 主题升级到 v6.4.2 因为 spam 评论太多，暂时关闭评论。如需联系，请发邮件leaferx@outlook.com 因为最近比较忙碌，几乎没有时间打理博客，所以在最近很长一段时间内博客都可能不会有什么更新（（ # EOF]]></content>
+      <categories>
+        <category>博客通知</category>
+        <category>更新</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[OpenVZ + 强迫症 + Nginx Amplify]]></title>
@@ -52,9 +66,9 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+        <tag>NexT</tag>
         <tag>博客</tag>
         <tag>教程</tag>
-        <tag>NexT</tag>
         <tag>漏洞</tag>
         <tag>Leancloud</tag>
       </tags>
@@ -84,9 +98,9 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+        <tag>NexT</tag>
         <tag>博客</tag>
         <tag>教程</tag>
-        <tag>NexT</tag>
         <tag>漏洞</tag>
         <tag>Leancloud</tag>
       </tags>
@@ -152,6 +166,36 @@
         <tag>学习</tag>
         <tag>计算机程序的构造和解释</tag>
         <tag>SICP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在移动设备下启用NexT主题的目录页面和回到顶部按钮]]></title>
+    <url>%2F2017%2F02%2F05%2FEnableTOConMobile%2F</url>
+    <content type="text"><![CDATA[其实就是改写一下css 个人觉得在移动端还是比较需要目录的主要涉及/themes/next/source/css/_common/components/sidebar/目录下文件的修改效果可见本博客移动端页面 Step 0确保你拥有一个以NexT为主题的Hexo博客 版本大概任意orz Step 1使用文本编辑器打开/themes/next/source/css/_common/components/sidebar/sidebar.styl在.sidebar下将+tablet()和+mobile()注释掉123456/*+tablet() &#123; display: none !important; &#125; +mobile() &#123; display: none !important; &#125;*/ Step 2在移动端启用目录按钮使用文本编辑器打开/themes/next/source/css/_common/components/sidebar/sidebar-toggle.styl在.sidebar-toggle下将+tablet()和+mobile()注释掉即可为了适配移动端，我微调了部分css如下：12345678910111213141516+tablet() &#123; right: 20px; bottom: 45px; //微调位置 -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; //增加透明效果 /*display: none;*/&#125;+mobile() &#123; right: 20px; bottom: 45px; //微调位置 -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; //增加透明效果 /*display: none;*/&#125; Step 3在移动端启用回到顶部按钮使用文本编辑器打开/themes/next/source/css/_common/components/back-to-top.styl在.back-to-top下将部分代码修改如下：1234567891011121314+mobile() &#123; right: 20px; -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; /*display: none;*/&#125;+tablet() &#123; right: 20px; -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; /*display: none;*/&#125; 完成 *注：个人预计在小屏移动端可能会出现适配不良的情况；以及友链较多的博客慎用，可能会产生向下溢出？]]></content>
+      <categories>
+        <category>Hexo折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>博客</tag>
+        <tag>教程</tag>
+        <tag>美化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在NexT主题底部小心心增加点击动画功能]]></title>
+    <url>%2F2017%2F01%2F30%2FBottomheart%2F</url>
+    <content type="text"><![CDATA[给你NexT主题的Hexo博客底部的小心心增加一点乐趣！效果如图仅需3分钟！ Step 0确保你拥有一个以NexT为主题的Hexo博客 版本大概任意orz Step 1下载hexo-next-bottomheart.js（可以把链接复制到下载工具中或者直接新建文件然后复制粘贴），并把它保存在/themes/next/source/js/src/目录下。 Step 2使用文本编辑器打开/themes/next/layout/_layout.swig在尾部&lt;/body&gt;上方新增一行（line 5），修改后的文件如下12345678...&#123;% include '_components/algolia-search/assets.swig' %&#125; &lt;script type="text/javascript" src="/js/src/hexo-next-bottomheart.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; Step 3使用文本编辑器打开/themes/next/layout/_partials/footer.swig在123456789...&lt;span itemprop="copyrightYear"&gt;&#123;&#123; current &#125;&#125;&lt;/span&gt;&lt;span class="with-love"&gt; &lt;i class="fa fa-&#123;&#123; theme.authoricon &#125;&#125;"&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class="author" itemprop="copyrightHolder"&gt;&#123;&#123; config.author &#125;&#125;&lt;/span&gt;... 处，修改line 5为1&lt;div id="bottomheart" style="cursor:pointer;"&gt;&lt;i class="fa fa-&#123;&#123; theme.authoricon &#125;&#125;"&gt;&lt;/i&gt;&lt;/div&gt; 这时候，重新部署你的博客，就可以疯狂点击小心心啦 Step 4由于频繁点击小心心会造成周围文字不断被选中强迫症表示非常难受，所以修改css使用文本编辑器打开/themes/next/layout/_partials/footer.swig在.footer类中加入如下规则12345-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;-khtml-user-select: none;user-select: none; 这样就全部完成啦 To Do有空会增加配合Leancloud实现点击计数功能并更新教程，这样大家就可以知道有没有人又在偷偷给你点赞啦 *注：js文件来自ehlxr并由我进行一些修改，在此对他表示感谢]]></content>
+      <categories>
+        <category>Hexo折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>博客</tag>
+        <tag>教程</tag>
+        <tag>美化</tag>
       </tags>
   </entry>
   <entry>
