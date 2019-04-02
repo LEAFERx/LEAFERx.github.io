@@ -61,9 +61,9 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-        <tag>NexT</tag>
         <tag>博客</tag>
         <tag>教程</tag>
+        <tag>NexT</tag>
         <tag>漏洞</tag>
         <tag>Leancloud</tag>
       </tags>
@@ -93,9 +93,9 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-        <tag>NexT</tag>
         <tag>博客</tag>
         <tag>教程</tag>
+        <tag>NexT</tag>
         <tag>漏洞</tag>
         <tag>Leancloud</tag>
       </tags>
@@ -161,36 +161,6 @@
         <tag>学习</tag>
         <tag>计算机程序的构造和解释</tag>
         <tag>SICP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[在移动设备下启用NexT主题的目录页面和回到顶部按钮]]></title>
-    <url>%2F2017%2F02%2F05%2FEnableTOConMobile%2F</url>
-    <content type="text"><![CDATA[其实就是改写一下css 个人觉得在移动端还是比较需要目录的主要涉及/themes/next/source/css/_common/components/sidebar/目录下文件的修改效果可见本博客移动端页面 Step 0确保你拥有一个以NexT为主题的Hexo博客 版本大概任意orz Step 1使用文本编辑器打开/themes/next/source/css/_common/components/sidebar/sidebar.styl在.sidebar下将+tablet()和+mobile()注释掉123456/*+tablet() &#123; display: none !important; &#125; +mobile() &#123; display: none !important; &#125;*/ Step 2在移动端启用目录按钮使用文本编辑器打开/themes/next/source/css/_common/components/sidebar/sidebar-toggle.styl在.sidebar-toggle下将+tablet()和+mobile()注释掉即可为了适配移动端，我微调了部分css如下：12345678910111213141516+tablet() &#123; right: 20px; bottom: 45px; //微调位置 -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; //增加透明效果 /*display: none;*/&#125;+mobile() &#123; right: 20px; bottom: 45px; //微调位置 -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; //增加透明效果 /*display: none;*/&#125; Step 3在移动端启用回到顶部按钮使用文本编辑器打开/themes/next/source/css/_common/components/back-to-top.styl在.back-to-top下将部分代码修改如下：1234567891011121314+mobile() &#123; right: 20px; -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; /*display: none;*/&#125;+tablet() &#123; right: 20px; -moz-opacity: 0.8; -khtml-opacity: 0.8; opacity: 0.8; /*display: none;*/&#125; 完成 *注：个人预计在小屏移动端可能会出现适配不良的情况；以及友链较多的博客慎用，可能会产生向下溢出？]]></content>
-      <categories>
-        <category>Hexo折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>博客</tag>
-        <tag>教程</tag>
-        <tag>美化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[在NexT主题底部小心心增加点击动画功能]]></title>
-    <url>%2F2017%2F01%2F30%2FBottomheart%2F</url>
-    <content type="text"><![CDATA[给你NexT主题的Hexo博客底部的小心心增加一点乐趣！效果如图仅需3分钟！ Step 0确保你拥有一个以NexT为主题的Hexo博客 版本大概任意orz Step 1下载hexo-next-bottomheart.js（可以把链接复制到下载工具中或者直接新建文件然后复制粘贴），并把它保存在/themes/next/source/js/src/目录下。 Step 2使用文本编辑器打开/themes/next/layout/_layout.swig在尾部&lt;/body&gt;上方新增一行（line 5），修改后的文件如下12345678...&#123;% include '_components/algolia-search/assets.swig' %&#125; &lt;script type="text/javascript" src="/js/src/hexo-next-bottomheart.js"&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt; Step 3使用文本编辑器打开/themes/next/layout/_partials/footer.swig在123456789...&lt;span itemprop="copyrightYear"&gt;&#123;&#123; current &#125;&#125;&lt;/span&gt;&lt;span class="with-love"&gt; &lt;i class="fa fa-&#123;&#123; theme.authoricon &#125;&#125;"&gt;&lt;/i&gt;&lt;/span&gt;&lt;span class="author" itemprop="copyrightHolder"&gt;&#123;&#123; config.author &#125;&#125;&lt;/span&gt;... 处，修改line 5为1&lt;div id="bottomheart" style="cursor:pointer;"&gt;&lt;i class="fa fa-&#123;&#123; theme.authoricon &#125;&#125;"&gt;&lt;/i&gt;&lt;/div&gt; 这时候，重新部署你的博客，就可以疯狂点击小心心啦 Step 4由于频繁点击小心心会造成周围文字不断被选中强迫症表示非常难受，所以修改css使用文本编辑器打开/themes/next/layout/_partials/footer.swig在.footer类中加入如下规则12345-moz-user-select: none;-webkit-user-select: none;-ms-user-select: none;-khtml-user-select: none;user-select: none; 这样就全部完成啦 To Do有空会增加配合Leancloud实现点击计数功能并更新教程，这样大家就可以知道有没有人又在偷偷给你点赞啦 *注：js文件来自ehlxr并由我进行一些修改，在此对他表示感谢]]></content>
-      <categories>
-        <category>Hexo折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>博客</tag>
-        <tag>教程</tag>
-        <tag>美化</tag>
       </tags>
   </entry>
   <entry>
