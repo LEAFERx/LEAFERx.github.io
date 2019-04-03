@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://leaferx.online/"/>
-  <updated>2018-10-28T10:25:37.674Z</updated>
+  <updated>2019-04-03T13:01:29.439Z</updated>
   <id>https://leaferx.online/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>最近做的两件蠢事</title>
+    <link href="https://leaferx.online/2019/04/03/two-stupid-things/"/>
+    <id>https://leaferx.online/2019/04/03/two-stupid-things/</id>
+    <published>2019-04-03T11:52:21.000Z</published>
+    <updated>2019-04-03T13:01:29.439Z</updated>
+    
+    <content type="html"><![CDATA[<p><center>最近做了两件挺蠢的事情。</center><br><a id="more"></a></p><hr><p>第一件事呢，就是可能我太急躁了。在重构 LeanCloud Counter 的时候，步子迈的太大？然后可能由于语言不通或者什么，导致 NexT Team 有人认为我要篡权？</p><p>（#黑人问号.jpg？</p><p>也对，开源项目又没钱拿，xjb 重构吃力不讨好，没有新功能还容易被 diss（</p><p>不过就很莫名其妙 orz 还被开出了 NexT Team</p><p>（详情可以看<a href="https://github.com/theme-next/hexo-theme-next/pull/707" rel="external nofollow noopener noreferrer" target="_blank">这里</a></p><p>现在想想我也真是挺蠢的2333</p><hr><p>第二件事呢，就是真的我自己作死了。</p><p>在给自己的博客更新的时候，手滑 push 到了 master…</p><p>当我看到那个 100% 的时候，我内心就直接报警了。刚有点矛盾，还作死，这不是找死吗…</p><p>虽然并不会有什么影响，rebase 一下就好了。</p><p>然后就收获飞机票一张~</p><p>这件事告诉我，<code>git push</code> 的时候，一定要指定 remote。或者干脆，在 <code>git add remote</code> 的时候，直接把 push 和 fetch 的 url 设置成不一样的。的确，NexT 的 master 的 protection 不设置禁止直接 push 但设置其他限制导致 push 进去根本来不及后悔然而 rebase 或者 reset 的时候连 -f 都没用，像我这样的 careless junior git noob 根本不应该有 admin 权限（</p><p>果然还是我太菜了。</p><hr><p>好的其实，这篇文章是来宣传一下自己新写的 <a href="https://github.com/LEAFERx/hexo-leancloud-counter" rel="external nofollow noopener noreferrer" target="_blank">Hexo 插件</a>。全新重构的页面脚本，兼顾性能与扩展性；全新的极度友好的 <code>init</code> 命令，做到了完全自动化设置权限；改用 <code>master key</code> 作为鉴权方式，既安全又更加方便，同时也支持了 CI &amp; CD；同时，实时热门文章、实时点赞等功能也在计划当中。But, who really cares 呢？</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;center&gt;最近做了两件挺蠢的事情。&lt;/center&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>基石#0 | 开始之前的一些碎碎念</title>
+    <link href="https://leaferx.online/2019/04/03/cornerstone-0/"/>
+    <id>https://leaferx.online/2019/04/03/cornerstone-0/</id>
+    <published>2019-04-03T11:51:32.000Z</published>
+    <updated>2019-04-03T13:01:29.438Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是 Cornerstone 基石系列的第零篇。</p><p>基石，如其名，在这个系列中，我将会写一些有关 JavaScript 和 Node.js 的基础、底层的一些东西。</p><p>为什么打算开始这个系列呢？其实我很早就有这个打算了。经常在 GitHub 上闲逛，读一些代码之类的，总感觉自己的基础还是不够扎实，对于很多代码和架构的理解，都只是浮于表面。同时，由于<a href="/2019/04/03/two-stupid-things/" title="一些原因">一些原因</a>，深刻地感受到了自己最近的心态可能过于浮躁，甚至于急功近利，所以希望自己能够沉淀一二。<em>“如果不写什么有意义的内容，光折腾博客、主题，这毫无意义。”</em></p><p>当然，好奇心也是一个很主要的原因。我发现，比起去学习如何使用 Vue，我更愿意从 Vue 是如何跑起来的下手，对于任何其他有趣的框架也是一样。然而以我目前的水平，还远远不能够理解他们的架构。贸然花费大量的时间去阅读源码，只是事倍功半。所以我打算从基础入手，潜心修炼（好中二哈哈哈）。</p><p>不过，由于学业繁忙（我真的是要忙死了 真实高四），我会尽量做到两周一篇的更新频率，也算是对自己的一种督促。</p><p>第零篇将会作为基石系列的目录和索引。<br><a id="more"></a></p><hr><p>基石#0 | 开始之前的一些碎碎念<br><a href="/2019/04/03/cornerstone-1-base64/" title="基石#1 | Base64 编码（未完成，暂时无法访问）">基石#1 | Base64 编码（未完成，暂时无法访问）</a></p><hr><p>好了最后再立点小目标吧。不仅是基础，自己的技术栈也需要扩大一点。目前打算学习的有 <code>TypeScript</code>、<code>Rxjs</code>、<code>Jest</code>，希望可以坚持。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是 Cornerstone 基石系列的第零篇。&lt;/p&gt;
+&lt;p&gt;基石，如其名，在这个系列中，我将会写一些有关 JavaScript 和 Node.js 的基础、底层的一些东西。&lt;/p&gt;
+&lt;p&gt;为什么打算开始这个系列呢？其实我很早就有这个打算了。经常在 GitHub 上闲逛，读一些代码之类的，总感觉自己的基础还是不够扎实，对于很多代码和架构的理解，都只是浮于表面。同时，由于&lt;a href=&quot;/2019/04/03/two-stupid-things/&quot; title=&quot;一些原因&quot;&gt;一些原因&lt;/a&gt;，深刻地感受到了自己最近的心态可能过于浮躁，甚至于急功近利，所以希望自己能够沉淀一二。&lt;em&gt;“如果不写什么有意义的内容，光折腾博客、主题，这毫无意义。”&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;当然，好奇心也是一个很主要的原因。我发现，比起去学习如何使用 Vue，我更愿意从 Vue 是如何跑起来的下手，对于任何其他有趣的框架也是一样。然而以我目前的水平，还远远不能够理解他们的架构。贸然花费大量的时间去阅读源码，只是事倍功半。所以我打算从基础入手，潜心修炼（好中二哈哈哈）。&lt;/p&gt;
+&lt;p&gt;不过，由于学业繁忙（我真的是要忙死了 真实高四），我会尽量做到两周一篇的更新频率，也算是对自己的一种督促。&lt;/p&gt;
+&lt;p&gt;第零篇将会作为基石系列的目录和索引。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Cornerstone 基石系列" scheme="https://leaferx.online/categories/Cornerstone-%E5%9F%BA%E7%9F%B3%E7%B3%BB%E5%88%97/"/>
+    
+    
+      <category term="Node.js" scheme="https://leaferx.online/tags/Node-js/"/>
+    
+      <category term="JavaScript" scheme="https://leaferx.online/tags/JavaScript/"/>
+    
+      <category term="Conterstone" scheme="https://leaferx.online/tags/Conterstone/"/>
+    
+      <category term="基石" scheme="https://leaferx.online/tags/%E5%9F%BA%E7%9F%B3/"/>
+    
+      <category term="基础" scheme="https://leaferx.online/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="Fundamental" scheme="https://leaferx.online/tags/Fundamental/"/>
+    
+  </entry>
   
   <entry>
     <title>让你的 Nginx 在配置文件改变时自动 reload</title>
@@ -45,34 +100,6 @@
       <category term="pyinotify" scheme="https://leaferx.online/tags/pyinotify/"/>
     
       <category term="systemd" scheme="https://leaferx.online/tags/systemd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2018年10月站点更新</title>
-    <link href="https://leaferx.online/2018/10/28/SiteUpdate201810/"/>
-    <id>https://leaferx.online/2018/10/28/SiteUpdate201810/</id>
-    <published>2018-10-28T09:48:34.000Z</published>
-    <updated>2018-10-28T09:53:35.454Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><p>NexT 主题升级到 v6.4.2</p></li><li><p>因为 spam 评论太多，暂时关闭评论。如需联系，请发邮件<a href="mailto:leaferx@outlook.com" rel="external nofollow noopener noreferrer" target="_blank">leaferx@outlook.com</a></p></li></ul><p>因为最近比较忙碌，几乎没有时间打理博客，所以在最近很长一段时间内博客都可能不会有什么更新（（</p><p># EOF</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;NexT 主题升级到 v6.4.2&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;因为 spam 评论太多，暂时关闭评论。如需联系，请发邮件&lt;a href=&quot;mailto:leaferx@outlook.com&quot; rel=&quot;external nofollow noop
-      
-    
-    </summary>
-    
-      <category term="博客通知" scheme="https://leaferx.online/categories/%E5%8D%9A%E5%AE%A2%E9%80%9A%E7%9F%A5/"/>
-    
-      <category term="更新" scheme="https://leaferx.online/categories/%E5%8D%9A%E5%AE%A2%E9%80%9A%E7%9F%A5/%E6%9B%B4%E6%96%B0/"/>
-    
     
   </entry>
   
@@ -442,7 +469,7 @@
     <link href="https://leaferx.online/2017/01/16/Hello-World/"/>
     <id>https://leaferx.online/2017/01/16/Hello-World/</id>
     <published>2017-01-16T03:04:00.000Z</published>
-    <updated>2019-03-13T13:48:06.462Z</updated>
+    <updated>2019-04-02T16:28:27.337Z</updated>
     
     <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>在现实断裂的地方<br>梦 汇成了海</p><p>顾城 《弥合》</p></blockquote><p><center><br>所以你好 欢迎来到<strong>LEAFER x LAB</strong><br>这是我的博客 主要写一些技术类的文章<br>当然 可能还会放一些自己的作品<br>那么请持续关注啦<br>比心</center></p><p><img src="https://lc-cqha0xyi.cn-n1.lcfile.com/6739ea5d0082b2ce8992.jpg" width="100" height="100"><br><br><a id="more"></a></p><h3 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h3><p>咸鱼终于想起来要更新啦哈哈哈哈哈。<br>目前在上海科技大学勤奋<del>睡觉</del>学习.jpg<br><del>咸鱼一只，仍旧挣扎在高考的滚滚浪潮之下，是物竞党 + NOIP蒟蒻。</del><br>喜欢编程，喜欢设计，喜欢尝试各种新奇好玩的东西。<br>喜欢书，喜欢诗和奇奇怪怪的科普。<br>喜欢明信片，喜欢吃。<br>觉得自己应该是一只有趣的咸鱼。</p><h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3><p>由于各种时间不够，上了大学也只能不定期诈尸 qaq。<br><del>由于各种时间不够，所以大概高考前就都只能不定期诈尸啦。</del><br><img src="https://lc-cqha0xyi.cn-n1.lcfile.com/16f571ebd405069a1149.jpg" alt="STUDY!!"><br>但是一旦闲下来就会频繁诈尸哦。<br>所以请多多关注啦。</p><h3 id="关于文章转载和其他"><a href="#关于文章转载和其他" class="headerlink" title="关于文章转载和其他"></a>关于文章转载和其他</h3><p>如果没有特殊说明 本站所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noopener noreferrer" target="_blank">CC BY-NC-SA 4.0 CN</a> 许可协议<br>转载请注明作者并最好附带原文链接哦<br>顺便如果喜欢我的博客 欢迎友链ww</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>那么，送上一首Alan Pownall的Colourful Day。<br>请多多指教啦w。</p><audio src="https://lc-cqha0xyi.cn-n1.lcfile.com/051dfd94791c06b66a90.mp3" autoplay controls loop><br>浏览器不支持audio标签<br></audio>]]></content>
     
