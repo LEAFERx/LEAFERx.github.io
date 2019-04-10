@@ -1,5 +1,6 @@
 [
 {"title":"序  /  INTRO","url":"/2017/01/16/Hello-World/"},
+{"title":"序  /  INTRO","url":"/2017/01/16/hello-world/"},
 {"title":"书单  /  BookList","url":"/2017/01/27/Books/"},
 {"title":"在NexT主题底部小心心增加点击动画功能","url":"/2017/01/30/Bottomheart/"},
 {"title":"在移动设备下启用NexT主题的目录页面和回到顶部按钮","url":"/2017/02/05/EnableTOConMobile/"},
@@ -18,4 +19,6 @@
 {"title":"2018年10月站点更新","url":"/2018/10/28/SiteUpdate201810/"},
 {"title":"让你的 Nginx 在配置文件改变时自动 reload","url":"/2018/10/28/nginx-autoreload/"},
 {"title":"","url":"/2019/04/02/cornerstone/buffer/"},
+{"title":"基石#0 | 开始之前的一些碎碎念","url":"/2019/04/03/cornerstone-0/"},
+{"title":"最近做的两件蠢事","url":"/2019/04/03/two-stupid-things/"},
 ]
