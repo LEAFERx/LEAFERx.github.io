@@ -1,3 +1,4 @@
+https://leaferx.online/2019/08/18/talks-20190817/
 https://leaferx.online/2019/04/10/cornerstone-1-base64/
 https://leaferx.online/2019/04/03/two-stupid-things/
 https://leaferx.online/2019/04/03/cornerstone-0/
@@ -7,4 +8,3 @@ https://leaferx.online/2018/03/17/hexo-auto-open-vscode/
 https://leaferx.online/2018/03/16/lc-security-en/
 https://leaferx.online/2018/02/26/hexo-deploy-error-becauseof-git-credential/
 https://leaferx.online/2018/02/11/lc-security/
-https://leaferx.online/2018/01/21/illusion-and-more/
