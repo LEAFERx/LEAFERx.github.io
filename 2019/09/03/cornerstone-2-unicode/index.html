@@ -1,0 +1,351 @@
+<!DOCTYPE html><html class="theme-next muse" lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><script src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/fancybox@3.0.0/dist/css/jquery.fancybox.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css"><link rel="stylesheet" href="/css/main.css?v=7.1.2"><link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.1.2"><link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.1.2"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Muse",version:"7.1.2",sidebar:{position:"left",display:"post",offset:12,onmobile:!0,dimmer:!0},back2top:!0,back2top_sidebar:!1,fancybox:!0,fastclick:!0,lazyload:!0,tabs:!0,motion:{enable:!1,async:!0,transition:{post_block:"fadeIn",post_header:"fadeIn",post_body:"fadeIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css"><script type="text/javascript">var _paq=_paq||[];_paq.push(["trackPageView"]),_paq.push(["enableLinkTracking"]),function(){var e="//st.flyhigher.top/";_paq.push(["setTrackerUrl",e+"piwik.php"]),_paq.push(["setSiteId","2"]);var a=document,p=a.createElement("script"),t=a.getElementsByTagName("script")[0];p.type="text/javascript",p.async=!0,p.defer=!0,p.src=e+"piwik.js",t.parentNode.insertBefore(p,t)}()</script><style>.header-anchor{border-bottom:none;display:inline-block;margin-right:5px}</style><meta name="description" content="这是 Cornerstone 基石系列的第二篇，主题是 Unicode 与 UTF。"><meta name="keywords" content="Node.js,JavaScript,Conterstone,基石,基础,Fundamental,Unicode,UTF-8"><meta property="og:type" content="article"><meta property="og:title" content="基石#2 | Unicode 漫谈"><meta property="og:url" content="https://leaferx.online/2019/09/03/cornerstone-2-unicode/index.html"><meta property="og:site_name" content="LEAFER x LAB"><meta property="og:description" content="这是 Cornerstone 基石系列的第二篇，主题是 Unicode 与 UTF。"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-09-02T18:10:54.375Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="基石#2 | Unicode 漫谈"><meta name="twitter:description" content="这是 Cornerstone 基石系列的第二篇，主题是 Unicode 与 UTF。"><link rel="alternate" href="/atom.xml" title="LEAFER x LAB" type="application/atom+xml"><link rel="canonical" href="https://leaferx.online/2019/09/03/cornerstone-2-unicode/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>基石#2 | Unicode 漫谈 | LEAFER x LAB</title><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?db5a55d89cc89dd77ff08de18d30e45f";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">LEAFER x LAB</span><span class="logo-line-after"><i></i></span></a></div></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签<span class="badge">32</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档<span class="badge">20</span></a></li><li class="menu-item menu-item-13/36"><a href="/sentence" rel="section"><i class="menu-item-icon fa fa-fw fa-align-left"></i><br>13/36</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://leaferx.online/2019/09/03/cornerstone-2-unicode/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="LEAFERx"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="LEAFER x LAB"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">基石#2 | Unicode 漫谈</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2019-09-03 23:21:37 / 修改时间：02:10:54" itemprop="dateCreated datePublished" datetime="2019-09-03T23:21:37+08:00">2019-09-03</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Cornerstone-基石系列/" itemprop="url" rel="index"><span itemprop="name">Cornerstone 基石系列</span></a></span></span> <span class="post-comments-count"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-comment-o"></i></span> <span class="post-meta-item-text">评论数：</span><a href="/2019/09/03/cornerstone-2-unicode/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/09/03/cornerstone-2-unicode/" itemprop="commentCount"></span></a></span> <span id="/2019/09/03/cornerstone-2-unicode/" class="leancloud_visitors" data-flag-title="基石#2 | Unicode 漫谈"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数：</span><span class="leancloud-counter" data-leancloud-counter-url="/2019/09/03/cornerstone-2-unicode/" data-leancloud-counter-inc=""></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">本文字数：</span> <span title="本文字数">0</span></div></div></header><div class="post-body" itemprop="articleBody"><p>这是 Cornerstone 基石系列的第二篇，主题是 Unicode 与 UTF。</p><a id="more"></a><hr><h1 id="开始前的一些准备"><a class="header-anchor" href="#开始前的一些准备">¶</a>开始前的一些准备</h1><p>首先我们需要在脑海中记熟一些二进制的转换关系，以便直观地理解 Unicode。</p><table><thead><tr><th>储存大小</th><th>范围</th><th>十进制大小</th></tr></thead><tbody><tr><td>4 bit</td><td>0x0 - 0xF</td><td>2<sup>4</sup> = 16</td></tr><tr><td>1 Byte</td><td>0x00 - 0xFF</td><td>2<sup>8</sup> = 256</td></tr><tr><td>2 Bytes</td><td>0x0000 - 0xFFFF</td><td>2<sup>16</sup> = 65,536</td></tr></tbody></table><p>其次，我们需要了解字节序。字节序分为大端序（Big-Endian, BE）与小端序（Little-Endian, LE）。只需要记住，大端序的最高位字节存储在最低的内存地址处，而小端序的最高字节存储在最高的内存地址处。</p><p>以下是存储 32 位整数 0x12345678 的例子：</p><table><thead><tr><th style="text-align:center">内存地址</th><th style="text-align:center">大端序</th><th style="text-align:center">小端序</th></tr></thead><tbody><tr><td style="text-align:center">0x03</td><td style="text-align:center">0x12</td><td style="text-align:center">0x78</td></tr><tr><td style="text-align:center">0x02</td><td style="text-align:center">0x34</td><td style="text-align:center">0x56</td></tr><tr><td style="text-align:center">0x01</td><td style="text-align:center">0x56</td><td style="text-align:center">0x34</td></tr><tr><td style="text-align:center">0x00</td><td style="text-align:center">0x78</td><td style="text-align:center">0x12</td></tr></tbody></table><h1 id="什么是-unicode"><a class="header-anchor" href="#什么是-unicode">¶</a>什么是 Unicode</h1><blockquote><p>Unicode（中文：万国码、国际码、统一码、单一码）是电脑科学领域里的一项<strong>业界标准</strong>。它对世界上大部分的文字系统进行了整理、编码，使得电脑可以用更为简单的方式来呈现和处理文字。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p></blockquote><p>需要注意的是，Unicode 准确来说是一种<strong>字符集</strong>，而与我们日常中使用的各种编码有所区别。Unicode 给每一个它所管辖的字符分配了一个唯一而确定的 ID（二进制整数），但并没有规定这些字符应该如何储存、传输。规定这些字符如何的则是 UTF（Unicode Transformation Format）标准，即 UTF 是对 Unicode 的编码。</p><h1 id="unicode-的组成"><a class="header-anchor" href="#unicode-的组成">¶</a>Unicode 的组成</h1><h2 id="代码点-code-point-code-position"><a class="header-anchor" href="#代码点-code-point-code-position">¶</a>代码点（Code Point / Code Position）</h2><p>代码点用来称呼分配给字符的整数。例如，在 Unicode 中字符“爱”的代码点为 U+7231<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>。在表示代码点时，习惯用 U+ 作为前缀，然后紧接该代码点的十六进制数字。</p><h2 id="代码空间-code-space"><a class="header-anchor" href="#代码空间-code-space">¶</a>代码空间（Code Space)</h2><p>所有代码点组成集合称为代码空间。Unicode 的代码空间范围为 U+0000 到 U+10FFFF，一共 1,114,112 个代码点。截至本文写作时间，Unicode 最新标准 12.1.0<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> 已经给 137,929 个字符分配了代码点。</p><p><em>P.S. Unicode 12.0.0 至 12.1.0 只新增了一个字符，即日本新年号令和的合字（U+32FF）<sup class="footnote-ref"><a href="#fn3" id="fnref3:1">[3]</a></sup>。</em></p><h2 id="平面-plane"><a class="header-anchor" href="#平面-plane">¶</a>平面（Plane）</h2><p>Unicode 将 U+0000 到 U+10FFFF 分割为 17 个平面，每个平面拥有 65,536 个码点（即 2 字节）。其中，0 号平面称为基本多文种平面（Basic Multilingual Plane, BMP），其他平面则成为补充平面 / 辅助平面（Supplementary Plane）。不同平面的具体划分和作用如下<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>：</p><table><thead><tr><th>平面</th><th>始末字符值</th><th>中文名称</th><th>英文名称</th></tr></thead><tbody><tr><td>0 号平面</td><td>U+0000 - U+FFFF</td><td>基本多文种平面</td><td>Basic Multilingual Plane, BMP</td></tr><tr><td>1 号平面</td><td>U+10000 - U+1FFFF</td><td>多文种补充平面</td><td>Supplementary Multilingual Plane, SMP</td></tr><tr><td>2 号平面</td><td>U+20000 - U+2FFFF</td><td>表意文字补充平面</td><td>Supplementary Ideographic Plane, SIP</td></tr><tr><td>3 号平面</td><td>U+30000 - U+3FFFF</td><td>表意文字第三平面（未正式使用）</td><td>Tertiary Ideographic Plane, TIP</td></tr><tr><td>4~13 号平面</td><td>U+40000 - U+DFFFF</td><td>（尚未使用）</td><td></td></tr><tr><td>14 号平面</td><td>U+E0000 - U+EFFFF</td><td>特别用途补充平面</td><td>Supplementary Special-purpose Plane, SSP</td></tr><tr><td>15 号平面</td><td>U+F0000 - U+FFFFF</td><td>保留作为私人使用区（A区）</td><td>Private Use Area-A, PUA-A</td></tr><tr><td>16 号平面</td><td>U+100000 - U+10FFFF</td><td>保留作为私人使用区（B区）</td><td>Private Use Area-B, PUA-B</td></tr></tbody></table><p>BMP 是 Unicode 中最重要的平面，常用的字符都定义在这个平面中。</p><blockquote><p>在BMP中定义的代码点包括<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>：</p><ul><li><strong>ASCII</strong> 共 128 个字符，占据了 BMP 的前 128 个代码点</li><li><strong>ISO-8859-1</strong> 共 256 个字符，占据了 BMP 的前 256 个代码点</li><li><strong>CJK Unified Ideographs</strong> 占据 BMP 大约 1/3，定义了两万多个汉字，其中前 20,902 个汉字是按照《康熙字典》里笔画顺序排列的</li><li><strong>Surrogate Code Points</strong> 从 U+D800 到 U+DBFF 的 1024 个代码点是 High-surrogate 代码点，从 U+DC00 到 U+DFFF 的 1024 个代码点是 Low-surrogate 代码点。这 2048 个代码点并不是有效的字符代码点，它们是为 UTF 编码保留的。一个 High-surrogate 代码点和一个 Low-surrogate 代码点组成一个代理对（Surrogate Pair），可以在 UTF-16 里编码 BMP 之外的某个代码点。</li></ul></blockquote><p>以上便是 Unicode 的一些介绍。</p><p>详细的标准定义请参考 <a href="https://unicode.org" rel="external nofollow noopener noreferrer" target="_blank">https://unicode.org</a>。</p><p>以及推荐一个用来查询 Unicode 字符的网站 <a href="https://unicode-table.com/cn/" rel="external nofollow noopener noreferrer" target="_blank">https://unicode-table.com/cn/</a>，无聊的时候翻翻还是特别好玩der。</p><h1 id="utf-编码"><a class="header-anchor" href="#utf-编码">¶</a>UTF 编码</h1><p>以下将介绍三种 UTF 格式，即 UTF-8、UTF-16 和 UTF-32。</p><h2 id="utf-32"><a class="header-anchor" href="#utf-32">¶</a>UTF-32</h2><p>最直观的一个实现方法就是将 Unicode 代码点直接存储。UTF-32 就是这样的一种实现，它将每个字符都存储为 4 字节的代码点，这样的好处是不需要进行解析就可以直接将 UTF-32 存储的字符进行翻译，然而因为常用的字符几乎都存在于 BMP 中，所以这样的实现方案是对空间的极大浪费。目前，UTF-32 几乎没有任何实际用途，甚至于 HTML5 标准明文规定网页不得使用 UTF-32 存储<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup>。</p><h2 id="utf-8"><a class="header-anchor" href="#utf-8">¶</a>UTF-8</h2><p>UTF-8 是一种可变长的字符编码，其设计兼顾了存储效率和兼容性，是目前使用最为广泛的一种 UTF 编码。UTF-8 使用 1 到 4 字节来编码 Unicode（UTF-8 编码的最高上限是 6 字节，而事实上 4 字节就已经足够完成 Unicode 代码空间的编码）。其中，1 字节的 UTF-8 编码完全与 ASCII 编码兼容。</p><p>UTF-8 的编码规则很简单：</p><ul><li>对于单字节符号，该字节的第一位设为 0，后面 7 位为该符号的 Unicode 代码点。</li><li>对于 n（n &gt; 1） 字节的符号，第一个字节的前 n 位设为 1， 第 n + 1 位设为 0，之后的字节前两位一律设为 10，其余没有提及的二进制位为该符号的 Unicode 代码点。</li></ul><table><thead><tr><th>Unicode 范围</th><th>UTF-8</th></tr></thead><tbody><tr><td>U+0000 - U+007F</td><td>0xxxxxxx</td></tr><tr><td>U+0080 - U+07FF</td><td>110xxxxx 10xxxxxx</td></tr><tr><td>U+0800 - U+FFFF</td><td>1110xxxx 10xxxxxx 10xxxxxx</td></tr><tr><td>U+010000 - U+10FFFF</td><td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td></tr></tbody></table><p>还是以字符“爱”作为例子，U+7231 在 U+0800 - U+FFFF 范围内，所以采用 3 个字节进行编码。U+7231 转换成二进制为 01110010 00110001‬，填入 1110xxxx 10xxxxxx 10xxxxxx 可以得到 1110<strong>0111</strong> 10<strong>001000</strong> 10<strong>110001</strong>，转换成十六进制为 E7 88 B1‬，即“爱&quot;的 UTF-8 编码为 <strong>E7 88 B1</strong>。</p><p>有一个问题是，之前提到过字节序，那么 UTF-8 的存储是否受到字节序影响呢？答案是否定的。UTF-8 的存储其实是以单字节为单元的，应用程序在解析和存储 UTF-8 编码时，应该一个字节一个字节地进行处理，所以 UTF-8 的存储与字节序无关。然而，上面的 UTF-32 和接下来讲到的 UTF-16，其存储单元分别为四个字节和两个字节，因此和字节序有关。</p><h2 id="utf-16"><a class="header-anchor" href="#utf-16">¶</a>UTF-16</h2><p>UTF-16 同样是一种可变长的字符编码，其使用 2 到 4 字节来编码 Unicode。</p><p>还记得上文中提到的范围为 U+D800 至 U+DFFF 的代理代码点吗？这些代码点便是用来实现 UTF-16 编码的。</p><p>UTF-16 的编码规则如下：</p><ul><li><p>对于在 U+0000 至 U+D7FF 和 U+E000 至 U+FFFF 范围内的代码点（即 BMP 内所有除了代理代码点之外的代码点），UTF-16 将其代码点直接存储为 2 字节的内容。</p></li><li><p>对于在 U+10000 至 U+10FFFF 范围内的代码点（即所有辅助平面的代码点），UTF-16 将其编码为一对 2 字节共 4 字节的内容，其内容的生成方法如下：</p><ul><li><p>代码点减去 0x10000，得到的值范围处于 0x00000 至 0xFFFFF内，共 20 比特。</p></li><li><p>该值的前 10 比特被加上 0xD800，得到第一个 2 字节的内容，称之为前导代理（Lead Surrogates）。</p></li><li><p>该值的后 10 比特被加上 0xDC00，得到第二个 2 字节的内容，称之为后尾代理（Trail Surrogates）。</p></li></ul></li></ul><p>以上的叙述过于繁杂，我们还是以字符“爱”为例，对其进行 UTF-16 编码。</p><p>代码点 U+7321 处于 BMP 中，且不是代理代码点，所以其 UTF-16 的编码直接为 <strong>73 21</strong>。</p><p>我们再以代码点 U+1F600（字符为 emoji 笑脸 “😀”）为例。先将其减去 0x10000，得到 0xF600，二进制为 0000111101 1000000000，前 10 比特转换成十六进制为 0x003D，加上 0xD800 等于 0xD83D，后 10 比特转换成十六进制为 0x0200，加上 0xDC00 等于 0xDE00，所以其 UTF-16 的编码为 <strong>D8 3D DE 00</strong>。作为比较，其 UTF-8 的编码为 <strong>F0 9F 98 80</strong>（编码过程请读者自行推导）。</p><p>需要注意的是，以上两个 UTF-16 编码都是小端序编码，即 UTF-16LE。作为比较，其大端序编码（UTF-16BE）分别为 <strong>21 73</strong> 和 <strong>3D D8 00 DE</strong>。请读者特别注意 UTF-16 的编码单元为 2 字节，所以其 4 字节编码在大端序和小端序的区别只是编码单元内颠倒，前导代理和后尾代理的顺序并没有改变。</p><p><em>思考题：UTF-16 的设计如何识别一个字符编码到底是 2 字节还是 4 字节？</em></p><p>值得一提的是，将 UTF-8 与 UTF-16 进行对比可以发现，对于常用的汉字（CJK 字符集），UTF-16 将其编码为 2 个字节，而 UTF-8 则大多将其编码为 3 个字节。因此，对于汉字（CJK 字符集）集中的文本，UTF-16 编码后的大小要显著小于 UTF-8。</p><h2 id="byte-order-mark-bom"><a class="header-anchor" href="#byte-order-mark-bom">¶</a>Byte Order Mark (BOM)</h2><p>UTF-16 和 UTF-32 有字节序的问题，那么如何分辨一段 UTF-16 或 UTF-32 编码的文本究竟是大端序还是小端序呢？这就需要在文本之前附加一段 BOM。为了能够兼容不支持解析 BOM 的编辑器，Unicode 标准采用了零宽度无端空白字符（U+FEFF，目前已弃用）作为 BOM<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup>（然而事实上 BOM 还是造成了很大的兼容性问题）。因为 UTF-8 并没有字节序的问题，其也不需要 BOM，然而 Unicode 也还是为其设计了一个 BOM，用来作为可选的 UTF-8 编码标识。</p><table><thead><tr><th>编码</th><th>BOM</th></tr></thead><tbody><tr><td>UTF-8</td><td>EF BB BF</td></tr><tr><td>UTF-16LE</td><td>FE FF</td></tr><tr><td>UTF-16BE</td><td>FF FE</td></tr><tr><td>UTF-32LE</td><td>00 00 FE FF</td></tr><tr><td>UTF-32BE</td><td>FF FE 00 00</td></tr></tbody></table><p>以上便是对 Unicode 和 UTF 的简单介绍。更多细节性的东西请参考其标准定义（其实读读这些定义文档还是十分有趣的）。</p><h1 id="unicode-与-jacascript"><a class="header-anchor" href="#unicode-与-jacascript">¶</a>Unicode 与 JacaScript</h1><p><em>Unicode 在 JavaScript 存储时的字节序问题略过不表，将在以后有关 Buffer 的文章中说明。</em></p><p>由于历史原因，在 ES6 之前 JavaScript 只支持 UCS-2 编码（即 UTF-16 的 BMP 部分），因此对于 4 字节的 UTF-16 字符，JavaScript 会将其识别为两个字符。所幸，ES6 针对这个问题进行了优化，目前 ES6 已经较为完善地支持 UTF-16 了（然而由于兼容性问题，4 字节的 UTF-16 字符在 JavaScript 中作为字符串的长度仍然为 2）<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>。</p><p>有关 ES6 针对 Unicode 的支持网上各方面的资料已经叙述的十分详细了，而且这方面的内容在日常码代码时很少用到，这里也就略过，有兴趣的读者可以自行搜索。这里只说一点，ES6 在字符串中提供了 <code>\u{}</code> 转义，例子如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'😀'</span> === <span class="string">'\u&#123;1F600&#125;'</span></span><br></pre></td></tr></table></figure><hr><h1 id="写在最后"><a class="header-anchor" href="#写在最后">¶</a>写在最后</h1><p>这篇文章写得比较仓促，所以相关的知识也比较简略，大概算是一个用于科普的随手记，主要是写给自己看的，以防自己忘记这些基础的东西。</p><p>同时这篇文章与 JavaScript 和 Node.js 的关系不大。其实本来计划的第二篇是直接写有关 Buffer 等 JavaScript 和 Node.js 中的二进制数据处理知识，然而在学习相关知识的过程中发现自己对 Unicode 毫无了解，就打算临时改变主题，了解了一下 Unicode。其实 Unicode 涉及到的知识和历史十分庞杂，这篇文章所写的也只是基础中的基础，毕竟字符集和字符编码是从计算机出现伊始至今都是一个十分重要的问题，如果要详细叙述，写成几本专著都不为过。不过本文的知识用于应付日常码代码也应该还是足够，对于编程和运维中的编码问题也能够提供一些解决思路。</p><p>以及，之后的基石系列考虑到时间和精力问题，可能在叙述方面会变得越来越精简，毕竟这个系列的初衷还是为了写给自己看，督促自己夯实基础、努力学习的。当然如果有什么问题和建议，欢迎与我联系（评论万年不看，建议邮箱 / QQ）。</p><p>下一篇的预计完成时间应该在国庆期间，当然能提早会尽量提早。</p><p>有关其他的项目和坑，仍然在整理当中，欢迎继续关注.jpg 我们下一篇见！</p><hr class="footnotes-sep"><section class="footnotes"><ol class="footnotes-list"><li id="fn1" class="footnote-item"><p><a href="https://zh.wikipedia.org/zh-hans/Unicode" rel="external nofollow noopener noreferrer" target="_blank">https://zh.wikipedia.org/zh-hans/Unicode</a> <a href="#fnref1" class="footnote-backref">↩</a></p></li><li id="fn2" class="footnote-item"><p><a href="https://unicode-table.com/cn/7231/" rel="external nofollow noopener noreferrer" target="_blank">https://unicode-table.com/cn/7231/</a> <a href="#fnref2" class="footnote-backref">↩</a></p></li><li id="fn3" class="footnote-item"><p><a href="http://www.unicode.org/versions/Unicode12.1.0/" rel="external nofollow noopener noreferrer" target="_blank">http://www.unicode.org/versions/Unicode12.1.0/</a> <a href="#fnref3" class="footnote-backref">↩</a> <a href="#fnref3:1" class="footnote-backref">↩</a></p></li><li id="fn4" class="footnote-item"><p><a href="https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%B9%B3%E9%9D%A2%E6%98%A0%E5%B0%84" rel="external nofollow noopener noreferrer" target="_blank">https://zh.wikipedia.org/wiki/Unicode字符平面映射</a> <a href="#fnref4" class="footnote-backref">↩</a></p></li><li id="fn5" class="footnote-item"><p><a href="https://blog.csdn.net/zxhoo/article/details/38819517" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/zxhoo/article/details/38819517</a> <a href="#fnref5" class="footnote-backref">↩</a></p></li><li id="fn6" class="footnote-item"><p><a href="http://www.ruanyifeng.com/blog/2014/12/unicode.html" rel="external nofollow noopener noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2014/12/unicode.html</a> <a href="#fnref6" class="footnote-backref">↩</a></p></li><li id="fn7" class="footnote-item"><p><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F" rel="external nofollow noopener noreferrer" target="_blank">https://zh.wikipedia.org/wiki/位元組順序記號</a> <a href="#fnref7" class="footnote-backref">↩</a></p></li><li id="fn8" class="footnote-item"><p><a href="http://www.ruanyifeng.com/blog/2014/12/unicode.html" rel="external nofollow noopener noreferrer" target="_blank">http://www.ruanyifeng.com/blog/2014/12/unicode.html</a> <a href="#fnref8" class="footnote-backref">↩</a></p></li></ol></section></div><div><div id="reward-container"><div>如果这篇文章对你有帮助，那么不妨？</div> <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏</button><div id="qr" style="display:none"><div style="display:inline-block"> <img src="/images/wechatpay.jpg" alt="LEAFERx 微信支付"><p>微信支付</p></div><div style="display:inline-block"> <img src="/images/alipay.jpg" alt="LEAFERx 支付宝"><p>支付宝</p></div></div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> LEAFERx</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="https://leaferx.online/2019/09/03/cornerstone-2-unicode/" title="基石#2 | Unicode 漫谈">https://leaferx.online/2019/09/03/cornerstone-2-unicode/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/Node-js/" rel="tag"># Node.js</a> <a href="/tags/JavaScript/" rel="tag"># JavaScript</a> <a href="/tags/Conterstone/" rel="tag"># Conterstone</a> <a href="/tags/基石/" rel="tag"># 基石</a> <a href="/tags/基础/" rel="tag"># 基础</a> <a href="/tags/Fundamental/" rel="tag"># Fundamental</a> <a href="/tags/Unicode/" rel="tag"># Unicode</a> <a href="/tags/UTF-8/" rel="tag"># UTF-8</a></div><div class="post-widgets"><div class="social_share"><div id="needsharebutton-postbottom"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2019/08/18/talks-20190818/" rel="next" title="一份碎碎念"><i class="fa fa-chevron-left"></i> 一份碎碎念</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article></div></div><div class="comments" id="comments"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="LEAFERx"><p class="site-author-name" itemprop="name">LEAFERx</p><div class="site-description motion-element" itemprop="description"></div></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">20</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">32</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"></span><a href="https://github.com/leaferx" title="GitHub &rarr; https://github.com/leaferx" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a><span class="links-of-author-item"></span><br><a href="mailto:leaferx@outlook.com" title="Mail &rarr; mailto:leaferx@outlook.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i> Mail</a><span class="links-of-author-item"></span><a href="http://weibo.com/u/5677759124" title="微博 &rarr; http://weibo.com/u/5677759124" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-weibo"></i> 微博</a><span class="links-of-author-item"></span><a href="https://www.zhihu.com/people/leaferx" title="知乎 &rarr; https://www.zhihu.com/people/leaferx" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-globe"></i> 知乎</a></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> 大佬们qwq</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="https://maomihz.com" title="https://maomihz.com" rel="external nofollow noopener noreferrer" target="_blank">Maomi's Blog</a></li><li class="links-of-blogroll-item"> <a href="https://flyhigher.top" title="https://flyhigher.top" rel="external nofollow noopener noreferrer" target="_blank">无垠</a></li><li class="links-of-blogroll-item"> <a href="https://test2g.xyz" title="https://test2g.xyz" rel="external nofollow noopener noreferrer" target="_blank">Test2g</a></li><li class="links-of-blogroll-item"> <a href="http://zephray.cnvintage.org/" title="http://zephray.cnvintage.org/" rel="external nofollow noopener noreferrer" target="_blank">module ZephRay;</a></li><li class="links-of-blogroll-item"> <a href="https://darrenliuwei.com" title="https://darrenliuwei.com" rel="external nofollow noopener noreferrer" target="_blank">刘伟</a></li><li class="links-of-blogroll-item"> <a href="http://putown.org/" title="http://putown.org/" rel="external nofollow noopener noreferrer" target="_blank">Putown的葡萄棚</a></li><li class="links-of-blogroll-item"> <a href="http://www.danisjiang.com/" title="http://www.danisjiang.com/" rel="external nofollow noopener noreferrer" target="_blank">Danis Jiang基地</a></li></ul></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开始前的一些准备"><span class="nav-number">1.</span> <span class="nav-text">¶开始前的一些准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-unicode"><span class="nav-number">2.</span> <span class="nav-text">¶什么是 Unicode</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unicode-的组成"><span class="nav-number">3.</span> <span class="nav-text">¶Unicode 的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码点-code-point-code-position"><span class="nav-number">3.1.</span> <span class="nav-text">¶代码点（Code Point / Code Position）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码空间-code-space"><span class="nav-number">3.2.</span> <span class="nav-text">¶代码空间（Code Space)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平面-plane"><span class="nav-number">3.3.</span> <span class="nav-text">¶平面（Plane）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#utf-编码"><span class="nav-number">4.</span> <span class="nav-text">¶UTF 编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#utf-32"><span class="nav-number">4.1.</span> <span class="nav-text">¶UTF-32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#utf-8"><span class="nav-number">4.2.</span> <span class="nav-text">¶UTF-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#utf-16"><span class="nav-number">4.3.</span> <span class="nav-text">¶UTF-16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#byte-order-mark-bom"><span class="nav-number">4.4.</span> <span class="nav-text">¶Byte Order Mark (BOM)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unicode-与-jacascript"><span class="nav-number">5.</span> <span class="nav-text">¶Unicode 与 JacaScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">6.</span> <span class="nav-text">¶写在最后</span></a></li></ol></div></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer id="footer" class="footer"><div class="custom-banner"><h1>May the sadness be with you.</h1></div><div class="footer-inner"><div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span><span class="with-love" id="animate"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">LEAFERx</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span class="post-meta-item-text">站点总字数：</span> <span title="站点总字数">59k</span></div><div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v3.9.0</div> <span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Muse</a> v7.1.2</div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="site-pv" title="总访问量">已有<span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次到访 w</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script><script src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script><script src="//cdn.jsdelivr.net/npm/fancybox@3.0.0/dist/js/jquery.fancybox.pack.js"></script><script src="/js/utils.js?v=7.1.2"></script><script src="/js/motion.js?v=7.1.2"></script><script src="/js/schemes/muse.js?v=7.1.2"></script><script src="/js/scrollspy.js?v=7.1.2"></script><script src="/js/post-details.js?v=7.1.2"></script><script src="/js/next-boot.js?v=7.1.2"></script><script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>var GUEST=["nick","mail","link"],guest="nick,mail,link";guest=guest.split(",").filter(function(e){return-1<GUEST.indexOf(e)}),new Valine({el:"#comments",verify:!1,notify:!1,appId:"eTYJa9jA87atIRON2jXaomGY-gzGzoHsz",appKey:"vtExMxDaQlai4paYiSxSA67g",placeholder:"ヾﾉ≧∀≦)o来啊，快活啊!",avatar:"retro",meta:guest,pageSize:"10",visitor:!1,lang:"zh-cn"})</script><script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><script>var LeanCounter=function(){"use strict";function t(t){void 0===t&&(t={});var e=t.appId,n=t.appKey,r=t.elementClass;void 0===r&&(r=".leancloud-counter");var a=t.addCountInterval;void 0===a&&(a=100);var o=t.base;void 0===o&&(o="/1.1/classes/Counter");var i=t.initOnLoaded;if(void 0===i&&(i=!0),!e||!n)throw new Error("Missing appId or appKey.");this._appId=e,this._appKey=n,this._idCache={},this._addCountUrlQueue=[],this.addCountInterval=a,this.base=o,this.elements=document.querySelectorAll(r),i&&("loading"!==document.readyState?this.init():document.addEventListener("DOMContentLoaded",this.init.bind(this)))}return t.prototype._request=function(t,e,n){if(!this.apiServer)return Promise.reject(new Error("This LeanCounter instance is not initialized."));if("get"===t){var r="https://"+this.apiServer+this.base+e;if(n){var a=[];Object.keys(n).forEach(function(t){a.push(t+"="+encodeURI(n[t]))}),r+="?"+a.join("&")}return fetch(r,{headers:{"Content-Type":"application/json","X-LC-Id":this._appId,"X-LC-Key":this._appKey}}).then(function(t){return t.json()})}return fetch("https://"+this.apiServer+this.base+e,{method:t,headers:{"Content-Type":"application/json","X-LC-Id":this._appId,"X-LC-Key":this._appKey},body:JSON.stringify(n)}).then(function(t){return t.json()})},t.prototype.getCount=function(t){var e,n,o=this,r=t;return Array.isArray(r)||(r=Array(r)),e=[],n={},r.forEach(function(t){n[t]||(e.push(t),n[t]=!0)}),r=e,this._request("get","",{where:JSON.stringify({url:{$in:r}})}).then(function(t){var e=t.results,a={};return e.forEach(function(t){var e=t.url,n=t.objectId,r=t.time;o._idCache[e]||(o._idCache[e]=n),a[e]=r}),a})},t.prototype.addCount=function(t){var e=this;this._addCountUrlQueue.push(t),this._addCountIntervalId||(this._addCountIntervalId=setInterval(function(){if(0!==e._addCountUrlQueue.length){var t=e._addCountUrlQueue.pop();e._idCache[t]||e.getCount(t),e._request("put","/"+e._idCache[t],{time:{__op:"Increment",amount:1}})}},this.addCountInterval))},t.prototype.init=function(){var r=this;fetch("https://app-router.leancloud.cn/2/route?appId="+this._appId).then(function(t){return t.json()}).then(function(t){var e=t.api_server;r.apiServer=e;var n=[];return r.elements.forEach(function(t){n.push(t.dataset.leancloudCounterUrl)}),r.getCount(n)}).then(function(e){r.elements.forEach(function(t){"leancloudCounterInc"in t.dataset?(t.textContent=String(e[t.dataset.leancloudCounterUrl]+1),r.addCount(t.dataset.leancloudCounterUrl)):t.textContent=String(e[t.dataset.leancloudCounterUrl])})})},t}(),leanCounter=new LeanCounter({appId:"CQHA0XYIEmXVj87qQ88SlSIb-gzGzoHsz",appKey:"JxvMHcn828RoSEgcdbK37h3o"})</script><script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script><script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script><script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script><script>pbOptions={},pbOptions.iconStyle="box",pbOptions.boxForm="horizontal",pbOptions.position="bottomCenter",pbOptions.networks="Weibo,Wechat,Douban,QQZone,Twitter,Facebook",new needShareButton("#needsharebutton-postbottom",pbOptions)</script></body></html>
